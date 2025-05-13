@@ -23,7 +23,7 @@ import java.util.List;
         @PostMapping
         public ResponseEntity<RestaurantResponseDto> createRestaurant( @RequestBody RestaurantRequestDto dto){
 
-            RestaurantResponseDto restaurant = restaurantService.createPost(dto);
+            RestaurantResponseDto restaurant = restaurantService.createRestaurant(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body(restaurant);
         }
 

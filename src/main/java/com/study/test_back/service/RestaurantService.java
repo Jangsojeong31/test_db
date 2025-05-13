@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class RestaurantService {
     private final RestaurantRespository restaurantRespository;
 
-    public RestaurantResponseDto createPost(RestaurantRequestDto dto) {
+    public RestaurantResponseDto createRestaurant(RestaurantRequestDto dto) {
         RestaurantResponseDto responseDto = null;
 
         Restaurant restaurant = new Restaurant(dto.getId(), dto.getAddress(), dto.getName(), dto.getPhoneNumber());
