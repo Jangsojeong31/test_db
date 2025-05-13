@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
+@Setter
 @Builder
 public class Restaurant {
     @Id
@@ -16,4 +17,5 @@ public class Restaurant {
     private String name;
     private String address;
     private String phoneNumber;
+
 }

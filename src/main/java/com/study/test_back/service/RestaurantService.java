@@ -49,22 +49,47 @@ public class RestaurantService {
     }
 
     public List<RestaurantResponseDto> getAllRestaurant() {
-
-        List<RestaurantResponseDto> responseDto = null;
+        List<RestaurantResponseDto> responseDtos = null;
 
         List<Restaurant> restaurants = restaurantRespository.findAll();
 
-
-        responseDto = restaurants.stream()
-                        .map(restaurant -> RestaurantResponseDto.builder()
-                                .id(restaurant.getId())
-                                .name(restaurant.getName())
-                                .address(restaurant.getAddress())
-                                .phoneNumber(restaurant.getPhoneNumber())
-                                .build())
+        responseDtos = restaurants.stream()
+                .map(restaurant -> RestaurantResponseDto.builder()
+                        .id(restaurant.getId())
+                        .name(restaurant.getName())
+                        .address(restaurant.getAddress())
+                        .phoneNumber(restaurant.getPhoneNumber())
+                        .build())
                 .collect(Collectors.toList());
 
+        return responseDtos;
+    }
+
+    public RestaurantResponseDto updateRestaurant(Long id, RestaurantRequestDto dto) {
+        RestaurantResponseDto responseDto = null;
+
+        Restaurant restaurant = restaurantRespository.findById(id)
+                .orElseThrow(() -> new Error("없음"));
+
+        restaurant.setId(dto.getId());
+        restaurant.setName(dto.getName());
+        restaurant.setAddress(dto.getAddress());
+        restaurant.setPhoneNumber(dto.getPhoneNumber());
+
+        responseDto = RestaurantResponseDto.builder()
+                .id(restaurant.getId())
+                .name(restaurant.getName())
+                .address(restaurant.getAddress())
+                .phoneNumber(restaurant.getPhoneNumber())
+                .build();
 
         return responseDto;
+    }
+
+    public void deleteRestaurant(Long id) {
+        Restaurant restaurant = restaurantRespository.findById(id)
+                .orElseThrow(() -> new Error("없음"));
+        restaurantRespository.delete(restaurant);
+
     }
 }

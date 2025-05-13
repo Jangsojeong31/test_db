@@ -43,18 +43,18 @@ import java.util.List;
 
         // 수정
         @PutMapping("/{id}")
-        public ResponseEntity<ResponseDto<PostDetailResponseDto>> updatePost(
+        public ResponseEntity<RestaurantResponseDto> updateRestaurant(
                 @PathVariable Long id,
-                @Valid @RequestBody PostUpdateRequestDto dto
+                @RequestBody RestaurantRequestDto dto
         ){
-            ResponseDto<PostDetailResponseDto> response = postService.updatePost(id, dto);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+            RestaurantResponseDto restaurant = restaurantService.updateRestaurant(id, dto);
+            return ResponseEntity.status(HttpStatus.OK).body(restaurant);
         }
 
         // 삭제
         @DeleteMapping("/{id}")
-        public ResponseEntity<ResponseDto<Void>> deletePost(@PathVariable Long id){
-            ResponseDto<Void> response = postService.deletePost(id);
+        public ResponseEntity<Void> deleteRestaurant(@PathVariable Long id){
+            restaurantService.deleteRestaurant(id);
             return ResponseEntity.noContent().build();
         }
 }
